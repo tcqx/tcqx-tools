@@ -8,7 +8,7 @@ APP_USER = "tcqx"
 
 GITHUB_URL = "https://github.com/tcqx"
 GUNSLOL_URL = "https://guns.lol/tcqx"
-DISCORD_INVITE = "https://discord.gg/TON-INVITE"
+DISCORD_INVITE = "https://discord.gg/ServeurBientotDisponible"
 
 COLOR_PRIMARY = "bright_green"
 COLOR_SECONDARY = "green"
