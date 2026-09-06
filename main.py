@@ -15,7 +15,7 @@ MODULES = [
     ("02", "DNS"),
     ("03", "System"),
     ("04", "OSINT"),
-    ("05", "Discord"),
+    ("05", "Links"),
     ("06", "Utilities"),
     ("07", "About"),
     ("00", "Exit"),
@@ -44,13 +44,22 @@ def show_about(console):
     )
 
     body.append("GitHub   : ", style=config.COLOR_DIM)
-    body.append(f"{config.GITHUB_URL}\n", style=config.COLOR_ACCENT)
+    body.append(
+        f"{config.GITHUB_URL}\n",
+        style=config.COLOR_ACCENT
+    )
 
     body.append("Guns.lol : ", style=config.COLOR_DIM)
-    body.append(f"{config.GUNSLOL_URL}\n", style=config.COLOR_ACCENT)
+    body.append(
+        f"{config.GUNSLOL_URL}\n",
+        style=config.COLOR_ACCENT
+    )
 
     body.append("Discord  : ", style=config.COLOR_DIM)
-    body.append(f"{config.DISCORD_INVITE}\n", style=config.COLOR_ACCENT)
+    body.append(
+        f"{config.DISCORD_INVITE}\n",
+        style=config.COLOR_ACCENT
+    )
 
     console.print(
         Panel(
@@ -70,7 +79,7 @@ def run_module(console, choice):
         "02": ("DNS", dns.run),
         "03": ("System", system.run),
         "04": ("OSINT", osint.run),
-        "05": ("Discord", discord.run),
+        "05": ("Links", discord.run),
         "06": ("Utilities", utilities.run),
         "07": ("About", show_about),
     }
@@ -78,13 +87,25 @@ def run_module(console, choice):
     module = modules.get(choice)
 
     if module is None:
-        animations.print_error(console, "Unknown option.")
-        ui.press_enter(console, "Press ENTER to continue...")
+        animations.print_error(
+            console,
+            "Unknown option."
+        )
+
+        ui.press_enter(
+            console,
+            "Press ENTER to continue..."
+        )
+
         return
 
     name, function = module
 
-    animations.transition_to(console, name)
+    animations.transition_to(
+        console,
+        name
+    )
+
     function(console)
 
 
@@ -95,9 +116,14 @@ def main():
         animations.boot_sequence(console)
 
         while True:
-            ui.print_dashboard(console, MODULES)
+            ui.print_dashboard(
+                console,
+                MODULES
+            )
 
-            choice = ui.footer_prompt(console).strip().lower()
+            choice = ui.footer_prompt(
+                console
+            ).strip().lower()
 
             if choice in ("00", "exit", "quit"):
                 console.print()
@@ -108,19 +134,36 @@ def main():
                     style=config.COLOR_SECONDARY
                 )
 
-                animations.print_ok(console, "See you soon.")
+                animations.print_ok(
+                    console,
+                    "See you soon."
+                )
+
                 break
 
-            run_module(console, choice)
+            run_module(
+                console,
+                choice
+            )
 
     except KeyboardInterrupt:
         console.print()
-        animations.print_error(console, "Interrupted.")
+
+        animations.print_error(
+            console,
+            "Interrupted."
+        )
+
         sys.exit(0)
 
     except Exception as exc:
         console.print()
-        animations.print_error(console, f"Error: {exc}")
+
+        animations.print_error(
+            console,
+            f"Error: {exc}"
+        )
+
         sys.exit(1)
 
 
