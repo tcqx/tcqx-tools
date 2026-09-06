@@ -1,39 +1,29 @@
 import webbrowser
 
-from core import ui, animations, config
+from core import ui, config
 
 
 def run(console):
-    ui.print_module_header(console, "Discord // Liens officiels")
+    while True:
+        ui.print_module_header(console, "Links // TCQX")
 
-    rows = {
-        "GitHub": config.GITHUB_URL,
-        "Guns.lol": config.GUNSLOL_URL,
-        "Discord": config.DISCORD_INVITE,
-    }
+        console.print(f" [{config.COLOR_ACCENT}][1][/] Discord")
+        console.print(f" [{config.COLOR_ACCENT}][2][/] GitHub")
+        console.print(f" [{config.COLOR_ACCENT}][3][/] Guns.lol")
+        console.print(f" [{config.COLOR_ACCENT}][0][/] Retour")
+        console.print()
 
-    ui.info_panel(console, "LIENS", rows)
-    console.print()
+        choice = ui.prompt(console, "Choix > ").strip()
 
-    choice = ui.prompt(
-        console,
-        "Ouvrir un lien dans le navigateur ? (github/guns/discord/non) > ",
-        default="non",
-    ).lower().strip()
+        links = {
+            "1": config.DISCORD_INVITE,
+            "2": config.GITHUB_URL,
+            "3": config.GUNSLOL_URL,
+        }
 
-    targets = {
-        "github": config.GITHUB_URL,
-        "guns": config.GUNSLOL_URL,
-        "discord": config.DISCORD_INVITE,
-    }
+        if choice == "0" or choice == "":
+            return
 
-    if choice in targets:
-        try:
-            webbrowser.open(targets[choice])
-            animations.print_ok(console, f"Ouverture de {targets[choice]}")
-        except Exception:
-            animations.print_error(console, "Impossible d'ouvrir le navigateur.")
-    else:
-        animations.print_ok(console, "Aucun lien ouvert.")
-
-    ui.press_enter(console)
+        if choice in links:
+            webbrowser.open(links[choice])
+            continue
